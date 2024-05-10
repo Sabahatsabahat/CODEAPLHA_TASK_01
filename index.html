@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ad9999;
+    }
+
+    .calculator {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    #result {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <h1>Age Calculator</h1>
+    <form id="ageCalculator">
+        <label for="birthdate">Enter your birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <input type="submit" value="Calculate Age">
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    document.getElementById("ageCalculator").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var birthdate = new Date(document.getElementById("birthdate").value);
+        var today = new Date();
+        var age = today.getFullYear() - birthdate.getFullYear();
+        
+        // Check if the birthday hasn't occurred yet this year
+        if (today.getMonth() < birthdate.getMonth() || (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+
+        document.getElementById("result").innerText = "Your age is: " + age;
+    });
+</script>
+</body>
+</html>
